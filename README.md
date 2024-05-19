@@ -27,7 +27,7 @@ npm install -g codeflattener
 To use `CodeFlattener`, navigate to your project directory and run:
 
 ```sh
-codeflattener --repo path/to/repo --output path/to/output.js
+npx codeflattener --repo path/to/repo --output path/to/output.js
 ```
 
 ### Options
@@ -42,7 +42,7 @@ codeflattener --repo path/to/repo --output path/to/output.js
 ### Example
 
 ```sh
-codeflattener --repo ./my-project --output ./flattened-code.js --include .js,.mjs --exclude .test.js --excludeFolders node_modules,dist
+npx codeflattener --repo ./my-project --output ./flattened-code.js --include .js,.mjs --exclude .test.js --excludeFolders node_modules,dist
 ```
 
 ## Important Note
