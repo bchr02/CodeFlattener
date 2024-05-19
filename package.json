@@ -1,0 +1,47 @@
+{
+  "name": "codeflattener",
+  "version": "1.0.0",
+  "description": "CodeFlattener is a Node.js command-line tool designed to export the structure and code of a repository into a single flat JavaScript or ES module file.",
+  "main": "index.mjs",
+  "type": "module",
+  "bin": {
+    "codeflattener": "./index.mjs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bchr02/CodeFlattener.git"
+  },
+  "keywords": [
+    "codeflattener",
+    "code",
+    "flatten",
+    "repository",
+    "export",
+    "single file",
+    "JavaScript",
+    "ES module",
+    "troubleshooting",
+    "AI tools",
+    "ChatGPT",
+    "code advice",
+    "code analysis",
+    "multifile",
+    "project",
+    "node.js",
+    "npm"
+  ],
+  "author": "Bill Christo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bchr02/CodeFlattener/issues"
+  },
+  "homepage": "https://github.com/bchr02/CodeFlattener#readme",
+  "dependencies": {
+    "es-module-lexer": "^1.5.3",
+    "minimist": "^1.2.8"
+  }
+}
