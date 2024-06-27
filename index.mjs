@@ -86,7 +86,7 @@ async function createFlatFile(entryFile, repoPath, outputPath, include, exclude,
   allFiles.forEach(function (file) {
     const relativePath = path.relative(path.dirname(entryFile), file);
     const fileContent = fs.readFileSync(file, "utf-8");
-    if (file.endsWith(".ts") || file.endsWith(".tsx")) {
+    if (outputType === "js" && (file.endsWith(".ts") || file.endsWith(".tsx"))) {
       const transpiled = ts.transpileModule(fileContent, {
         compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ESNext },
       }).outputText;
@@ -102,6 +102,7 @@ async function createFlatFile(entryFile, repoPath, outputPath, include, exclude,
 const args = minimist(process.argv.slice(2));
 const repoPath = args.repo || process.cwd(); // Default to current directory
 const outputPath = args.output || "./flattened-code.js"; // Default output path
+const outputType = args.outputType || "js"; // Default output type
 
 let entryFromPackageJson = "./index.js";
 let aliases = {};
@@ -125,5 +126,6 @@ console.log(`Include extensions: ${include}`);
 console.log(`Exclude extensions: ${exclude}`);
 console.log(`Exclude folders: ${excludeFolders}`);
 console.log(`Aliases: ${JSON.stringify(aliases)}`);
+console.log(`Output type: ${outputType}`);
 
-createFlatFile(entryFile, repoPath, outputPath, include, exclude, excludeFolders, aliases);
+createFlatFile(entryFile, repoPath, outputPath, include, exclude, excludeFolders, aliases, outputType);

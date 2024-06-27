@@ -1,10 +1,10 @@
 # CodeFlattener
 
-`CodeFlattener` is a Node.js tool designed to consolidate your codebase into a single JavaScript file. This single file can then be used to obtain advice from AI tools like ChatGPT. The generated file is not meant to be run as an application but rather to provide a comprehensive view of your codebase for analysis and guidance.
+`CodeFlattener` is a Node.js tool designed to consolidate your codebase into a single JavaScript or TypeScript file. This single file can then be used to obtain advice from AI tools like ChatGPT. The generated file is not meant to be run as an application but rather to provide a comprehensive view of your codebase for analysis and guidance.
 
 ## Purpose
 
-The primary purpose of `CodeFlattener` is to facilitate obtaining advice from AI tools like ChatGPT. By consolidating your codebase into a single JavaScript file, you can more easily and quickly provide context to AI tools, allowing them to offer more accurate and comprehensive feedback. This tool is especially useful for large projects where understanding the code requires looking at multiple interconnected files.
+The primary purpose of `CodeFlattener` is to facilitate obtaining advice from AI tools like ChatGPT. By consolidating your codebase into a single file, you can more easily and quickly provide context to AI tools, allowing them to offer more accurate and comprehensive feedback. This tool is especially useful for large projects where understanding the code requires looking at multiple interconnected files.
 
 ## Features
 
@@ -12,8 +12,9 @@ The primary purpose of `CodeFlattener` is to facilitate obtaining advice from AI
 - Supports ES modules.
 - Resolves and includes imported files.
 - Handles aliases specified in `package.json`.
-- Transpiles TypeScript files to JavaScript.
+- Transpiles TypeScript files to JavaScript when outputting as JavaScript.
 - Allows excluding specific file types and folders.
+- Option to output either a single JavaScript or TypeScript file.
 
 ## Installation
 
@@ -39,16 +40,17 @@ npx codeflattener --repo path/to/repo --output path/to/output.js
 - `--include`: Comma-separated list of file extensions to include. Defaults to `.js,.mjs,.ts,.tsx`.
 - `--exclude`: Comma-separated list of file extensions to exclude.
 - `--excludeFolders`: Comma-separated list of folders to exclude.
+- `--outputType`: The type of the output file, either `js` for JavaScript or `ts` for TypeScript. Defaults to `js`.
 
 ### Example
 
 ```sh
-npx codeflattener --repo ./my-project --output ./flattened-code.js --include .js,.mjs,.ts,.tsx --exclude .test.js --excludeFolders node_modules,dist
+npx codeflattener --repo ./my-project --output ./flattened-code.js --include .js,.mjs,.ts,.tsx --exclude .test.js --excludeFolders node_modules,dist --outputType js
 ```
 
 ## Important Note
 
-The generated JavaScript file is not meant to be run as an application. It is intended to provide a comprehensive view of your codebase for analysis and obtaining advice from AI tools like ChatGPT. Running the generated file as an application will not work as expected.
+The generated file is not meant to be run as an application. It is intended to provide a comprehensive view of your codebase for analysis and obtaining advice from AI tools like ChatGPT. Running the generated file as an application will not work as expected.
 
 ## License
 
