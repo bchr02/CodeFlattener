@@ -5,6 +5,7 @@ import path from "path";
 import minimist from "minimist";
 import { init, parse } from "es-module-lexer";
 import { createRequire } from "module";
+import ts from "typescript";
 
 const require = createRequire(import.meta.url);
 
@@ -55,7 +56,7 @@ async function getAllFiles(entryFile, repoPath, include, exclude, excludeFolders
         let ext = path.extname(resolvedPath);
 
         if (!ext) {
-          for (const extension of [".js", ".mjs", ".json"]) {
+          for (const extension of [".ts", ".tsx", ".js", ".mjs", ".json"]) {
             if (fs.existsSync(resolvedPath + extension)) {
               resolvedPath += extension;
               ext = extension;
@@ -85,7 +86,14 @@ async function createFlatFile(entryFile, repoPath, outputPath, include, exclude,
   allFiles.forEach(function (file) {
     const relativePath = path.relative(path.dirname(entryFile), file);
     const fileContent = fs.readFileSync(file, "utf-8");
-    content += `// --- ${relativePath} ---\n// The content below is from ${relativePath}. Please provide guidance based on this path.\n\n${fileContent}\n\n`;
+    if (file.endsWith(".ts") || file.endsWith(".tsx")) {
+      const transpiled = ts.transpileModule(fileContent, {
+        compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ESNext },
+      }).outputText;
+      content += `// --- ${relativePath} ---\n// The content below is from ${relativePath}. Provide guidance based on this path.\n\n${transpiled}\n\n`;
+    } else {
+      content += `// --- ${relativePath} ---\n// The content below is from ${relativePath}. Provide guidance based on this path.\n\n${fileContent}\n\n`;
+    }
   });
 
   fs.writeFileSync(outputPath, content, "utf-8");
@@ -108,7 +116,7 @@ try {
 }
 
 const entryFile = path.resolve(repoPath, args.entry || entryFromPackageJson);
-const include = args.include ? args.include.split(",") : [".js", ".mjs"];
+const include = args.include ? args.include.split(",") : [".js", ".mjs", ".ts", ".tsx"];
 const exclude = args.exclude ? args.exclude.split(",") : [];
 const excludeFolders = args.excludeFolders ? args.excludeFolders.split(",") : [];
 

@@ -8,10 +8,11 @@ The primary purpose of `CodeFlattener` is to facilitate obtaining advice from AI
 
 ## Features
 
-- Consolidates all JavaScript files into a single file.
+- Consolidates all JavaScript and TypeScript files into a single file.
 - Supports ES modules.
 - Resolves and includes imported files.
 - Handles aliases specified in `package.json`.
+- Transpiles TypeScript files to JavaScript.
 - Allows excluding specific file types and folders.
 
 ## Installation
@@ -35,14 +36,14 @@ npx codeflattener --repo path/to/repo --output path/to/output.js
 - `--repo`: The path to the repository. Defaults to the current directory.
 - `--output`: The path to the output file. Defaults to `./flattened-code.js`.
 - `--entry`: The entry point file. Defaults to the `main` file specified in `package.json` or `./index.js`.
-- `--include`: Comma-separated list of file extensions to include. Defaults to `.js,.mjs`.
+- `--include`: Comma-separated list of file extensions to include. Defaults to `.js,.mjs,.ts,.tsx`.
 - `--exclude`: Comma-separated list of file extensions to exclude.
 - `--excludeFolders`: Comma-separated list of folders to exclude.
 
 ### Example
 
 ```sh
-npx codeflattener --repo ./my-project --output ./flattened-code.js --include .js,.mjs --exclude .test.js --excludeFolders node_modules,dist
+npx codeflattener --repo ./my-project --output ./flattened-code.js --include .js,.mjs,.ts,.tsx --exclude .test.js --excludeFolders node_modules,dist
 ```
 
 ## Important Note
