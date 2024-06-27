@@ -1,6 +1,6 @@
 {
   "name": "codeflattener",
-  "version": "1.1.1",
+  "version": "1.1.0",
   "description": "CodeFlattener is a Node.js command-line tool designed to export the structure and code of a repository, including both JavaScript and TypeScript files, into a single flat JavaScript or ES module file. It resolves import statements, handles TypeScript transpilation, and supports import aliases.",
   "main": "index.mjs",
   "type": "module",
